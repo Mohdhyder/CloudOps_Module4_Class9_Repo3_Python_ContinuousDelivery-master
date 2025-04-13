@@ -17,7 +17,7 @@ resource "aws_instance" "example" {
   ami                    = data.aws_ssm_parameter.webserver-ami.value
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.instance.id]
-  key_name               = aws_key_pair.aws-key.key_name
+  key_name               = "terraform-key"
 
   tags = {
     Name = "ansible_install_mariadb"
@@ -25,7 +25,7 @@ resource "aws_instance" "example" {
     connection {
       type        = "ssh"
       user        = "ec2-user"
-      private_key   = file(var.ssh_key_private)
+      private_key   = file("~/.ssh/terraform-key")
       host        = self.public_ip
    }
 
