@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent Python-Node
     stages {
         stage('Lint') {
             steps {
